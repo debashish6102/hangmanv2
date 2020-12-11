@@ -43,7 +43,7 @@ lose1=pygame.transform.scale(lose1,(800,500))
 
 hangman_status = 0
 words=[]
-with open("C:/Users/debashish mishra/Desktop/word.txt", "r") as resource:
+with open("resource.txt", "r") as resource:
 	lines= resource.readlines()
 for l in lines:
     words.append(l.replace("\n",""))
@@ -110,6 +110,10 @@ def display_message(message):
       win.blit(lose1, (0, 0))
       pygame.display.update()
     pygame.time.delay(3000)
+def dis_word(mess):
+    text = WORD_FONT.render(mess, 1, BLACK)
+    win.blit(text, (WIDTH / 2 - text.get_width() / 2, HEIGHT / 2 - text.get_height()))
+    pygame.display.update()
 while run:
     clock.tick(FPS)
     for event in pygame.event.get():
@@ -133,8 +137,20 @@ while run:
             break
     if won:
         display_message("YOU WON!")
+	win.fill((255, 0, 0))
+        dis_word("THANK YOU FOR PLAYING")
+        pygame.time.delay(1000)
         break
     if hangman_status == 6:
         display_message("YOU LOST!")
+	win.fill((255, 0, 0))
+        dis_word("YOUR WORD WAS:")
+        pygame.time.delay(1000)
+        win.fill((255, 0, 0))
+        dis_word(word)
+        pygame.time.delay(2000)
+        win.fill((255, 0, 0))
+        dis_word("THANK YOU FOR PLAYING")
+        pygame.time.delay(1000)
         break
 pygame.quit()
