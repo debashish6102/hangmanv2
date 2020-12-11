@@ -63,12 +63,6 @@ def color():
     c = random.randint(0, 250)
     return (a, b, c)
 
-# setup game loop
-
-FPS = 5
-clock = pygame.time.Clock()
-run = True
-
 def draw():
     win.fill(BACKGROUND)
 
@@ -100,7 +94,7 @@ def draw():
     win.blit(images[hangman_status], (150, 100))
     pygame.display.update()
 
-
+# function to draw the winning and losing screen
 def display_message(message):
     pygame.time.delay(1000)
     if message=="YOU WON!":
@@ -114,6 +108,12 @@ def dis_word(mess):
     text = WORD_FONT.render(mess, 1, BLACK)
     win.blit(text, (WIDTH / 2 - text.get_width() / 2, HEIGHT / 2 - text.get_height()))
     pygame.display.update()
+# setup game loop
+
+FPS = 5
+clock = pygame.time.Clock()
+run = True
+
 while run:
     clock.tick(FPS)
     for event in pygame.event.get():
@@ -137,13 +137,13 @@ while run:
             break
     if won:
         display_message("YOU WON!")
-	win.fill((255, 0, 0))
+        win.fill((255, 0, 0))
         dis_word("THANK YOU FOR PLAYING")
         pygame.time.delay(1000)
         break
     if hangman_status == 6:
         display_message("YOU LOST!")
-	win.fill((255, 0, 0))
+        win.fill((255, 0, 0))
         dis_word("YOUR WORD WAS:")
         pygame.time.delay(1000)
         win.fill((255, 0, 0))
@@ -153,4 +153,5 @@ while run:
         dis_word("THANK YOU FOR PLAYING")
         pygame.time.delay(1000)
         break
+
 pygame.quit()
